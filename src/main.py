@@ -1,6 +1,5 @@
 # welcome to my discord bot
 from discord.ext import commands, tasks
-import os
 
 import variables
 import help
