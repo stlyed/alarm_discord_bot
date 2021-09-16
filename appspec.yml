@@ -3,18 +3,37 @@ os: linux
 files:
   - source: src
     destination: /home/ec2-user
-hooks:
+#  - source:
+#    destination:
+#hooks:
 #  ApplicationStop:
 #    - location:
 #      timeout:
 #      runas:
-  AfterInstall:
-    - location: scripts/install_dependencies.sh
-      timeout: 300
-      runas: root
-  ApplicationStart:
-    - location: scripts/application_start.sh
-      timeout: 300
+#    - location:
+#      timeout:
+#      runas:
+#  BeforeInstall:
+#    - location:
+#      timeout:
+#      runas:
+#    - location:
+#      timeout:
+#      runas:
+#  AfterInstall:
+#    - location:
+#      timeout:
+#      runas:
+#    - location:
+#      timeout:
+#      runas:
+#  ApplicationStart:
+#    - location:
+#      timeout:
+#      runas:
+#    - location:
+#      timeout:
+#      runas:
 #  ValidateService:
 #    - location:
 #      timeout:
