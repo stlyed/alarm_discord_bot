@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: text.txt
-    destination: /
+    destination: /home/ec2-user
 #  - source:
 #    destination:
 #hooks:
