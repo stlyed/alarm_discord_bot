@@ -1,8 +1,8 @@
 --- 
 files: 
-  - 
-    destination: /home/ec2-user/alarm_discord_bot
+  -
     source: src
+    destination: /home/ec2-user/alarm_discord_bot
 hooks: 
   ApplicationStart: 
     - 
