@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 This is a file that runs every 29 seconds as soon as the bot starts
 if the current time matches an entry in the saved alarms file

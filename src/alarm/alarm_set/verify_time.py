@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def verify_time(time, message):
     # check to see that time is a number not a letter
     # or that hour is under 24 and minute is under 60

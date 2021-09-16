@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 This is the main file for all user request/commands relating alarms
 it gets the alarm command and sends to the proper file to get process

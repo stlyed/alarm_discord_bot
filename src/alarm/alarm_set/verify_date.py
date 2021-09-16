@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def verify_date(today):
     # extract the necessary values from the time
     month = today[:2]

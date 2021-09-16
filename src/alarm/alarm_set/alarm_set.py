@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 this file will create new alarms with the given parameters from the user
 it verifies that every input is valid

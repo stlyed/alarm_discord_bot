@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # welcome to my discord bot
 from discord.ext import commands, tasks
 

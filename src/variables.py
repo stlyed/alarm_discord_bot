@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import boto3
 
 active_alarms_file = 'active_alarms.csv'
