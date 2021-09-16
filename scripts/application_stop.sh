@@ -1,2 +1,2 @@
 #!/bin/bash
-killall /src/main.py
+killall main.py
