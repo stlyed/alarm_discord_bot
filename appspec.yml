@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: text.txt
+  - source: src
     destination: /home/ec2-user
 #  - source:
 #    destination:
