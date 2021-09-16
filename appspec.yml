@@ -1,18 +1,23 @@
-version: 0.0
+--- 
+files: 
+  - 
+    destination: /
+    source: src
+hooks: 
+  ApplicationStart: 
+    - 
+      location: scripts/application_start.sh
+      runas: root
+      timeout: 300
+  ApplicationStop: 
+    - 
+      location: scripts/application_stop.sh
+      runas: root
+      timeout: 300
+  BeforeInstall: 
+    - 
+      location: scripts/install_dependencies.sh
+      runas: root
+      timeout: 300
 os: linux
-files:
-  - source: src
-    destination: /home/ec2-user/alarm_discord_bot
-hooks:
-  BeforeInstall:
-    - location: scripts/install_dependencies.sh
-      timeout: 300
-      runas: root
-  ApplicationStart:
-    - location: scripts/application_start.sh
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: scripts/application_stop.sh
-      timeout: 300
-      runas: root
+version: 0.0
