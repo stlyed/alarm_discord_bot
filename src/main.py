@@ -2,7 +2,9 @@
 from discord.ext import commands, tasks
 import os
 
+import variables
 import help
+
 import alarm.main as main_alarm
 import alarm.in_alarm as in_alarm
 
@@ -20,7 +22,7 @@ def main():
     # background task to check if an alarm is ringing
     @tasks.loop(seconds=1, count=None)
     async def check_alarm():
-        channel = bot.get_channel(int(os.environ.get('channel_id')))
+        channel = bot.get_channel(int(variables.get_secret('DISCORD_CHANNEL_ID')))
         is_in_alarm = in_alarm.in_alarm()
         if is_in_alarm != 'None':
             await channel.send(is_in_alarm)
@@ -40,7 +42,7 @@ def main():
                 await message.channel.send(main_alarm.alarm(message.author.mention, message.content))
 
     # send discord bot live
-    bot.run(os.environ.get('token_id'))
+    bot.run(variables.get_secret('DISCORD_TOKEN_ID'))
 
 
 if __name__ == '__main__':
