@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
+import hashlib
 import boto3
-import uuid
 
 active_alarms_file = 'active_alarms.csv'
 active_alarms_dup_file = 'active_alarms-dup.csv'
@@ -28,10 +28,8 @@ def get_secret(code_secret):
         x += 4; y += 4
 
 
-# generate an unique ID for each alarm
-def generate_alarm_id():
-    alarm_id = 'a-ID:'
-    id_generator = str(uuid.uuid4())
-    for i in id_generator:
-        if i.isdigit(): alarm_id += i
-    return alarm_id[:16]
+# generate an unique ID for each alarm based on the alarm specs
+def generate_alarm_id(user_alarm):
+    m = hashlib.md5()
+    m.update(str(user_alarm).encode())
+    return str(int(m.hexdigest(), 16))[:12]
