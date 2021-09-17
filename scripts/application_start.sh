@@ -1,2 +1,2 @@
 #!/bin/bash
-./main.py
+./home/ec2-user/code/main.py

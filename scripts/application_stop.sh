@@ -1,2 +1,2 @@
 #!/bin/bash
-killall main.py
+killall /home/ec2-user/code/main.py

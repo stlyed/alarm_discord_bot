@@ -20,7 +20,7 @@ def main():
         check_alarm.start()
 
     # background task to check if an alarm is ringing
-    @tasks.loop(seconds=1, count=None)
+    @tasks.loop(seconds=20, count=None)
     async def check_alarm():
         channel = bot.get_channel(int(variables.get_secret('DISCORD_CHANNEL_ID')))
         is_in_alarm = in_alarm.in_alarm()
@@ -47,5 +47,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# await bot.fetch_user(258694976999784450)  # get username based on user id
