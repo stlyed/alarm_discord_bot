@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import hashlib
 import boto3
 
 active_alarms_file = 'active_alarms.csv'
@@ -26,10 +25,3 @@ def get_secret(code_secret):
         if response[secret_value[x] + 1:secret_value[y]] == code_secret:
             return response[secret_value[x + 2] + 1:secret_value[y + 2]]
         x += 4; y += 4
-
-
-# generate an unique ID for each alarm based on the alarm specs
-def generate_alarm_id(user_alarm):
-    m = hashlib.md5()
-    m.update(str(user_alarm).encode())
-    return str(int(m.hexdigest(), 16))[:12]
