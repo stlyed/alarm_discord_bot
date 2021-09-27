@@ -3,8 +3,12 @@ os: linux
 files:
   - source: src
     destination: /home/ec2-user/code
-#hooks:
-#  AfterInstall:
-#    - location: scripts/install_dependencies.sh
-#      timeout: 300
-#      runas: root
+hooks:
+  AfterInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/application_start.sh
+      timeout: 300
+      runas: root
