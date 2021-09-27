@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
-# welcome to my discord bot
 from discord.ext import commands, tasks
 
 import variables
 import help
 
 import alarm.main as main_alarm
-import alarm.in_alarm as in_alarm
+import alarm.alarm_ringing as alarm_ringing
+from alarm import alarm_class
 
 
 def main():
     # initialize discord bot
     bot = commands.Bot(command_prefix='!')
+    discord_channel_id = int(variables.get_secret('DISCORD_CHANNEL_ID'))
+    discord_token_id = variables.get_secret('DISCORD_TOKEN_ID')
 
     # check when bot is ready
     @bot.event
@@ -22,10 +24,10 @@ def main():
     # background task to check if an alarm is ringing
     @tasks.loop(seconds=20, count=None)
     async def check_alarm():
-        channel = bot.get_channel(int(variables.get_secret('DISCORD_CHANNEL_ID')))
-        is_in_alarm = in_alarm.in_alarm()
-        if is_in_alarm != 'None':
-            await channel.send(is_in_alarm)
+        channel = bot.get_channel(discord_channel_id)
+        if alarm_ringing.alarm_ringing()[0] != 'None':
+            await channel.send(str(alarm_ringing.alarm_ringing()[0]))
+            alarm_class.Alarm().delete_from_db(alarm_ringing.alarm_ringing()[1])
 
     # responding to messages
     @bot.event
@@ -42,7 +44,7 @@ def main():
                 await message.channel.send(main_alarm.alarm(message.author.mention, message.content))
 
     # send discord bot live
-    bot.run(variables.get_secret('DISCORD_TOKEN_ID'))
+    bot.run(discord_token_id)
 
 
 if __name__ == '__main__':

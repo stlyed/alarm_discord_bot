@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-'''
+"""
 This is the main file for all user request/commands relating alarms
 it gets the alarm command and sends to the proper file to get process
 Get the processed result and send back to user
-'''
-
-from alarm.alarm_set import alarm_set  # my files
+"""
+from alarm import alarm_class
 
 
 def alarm(author, message):
-    alarm_confirmation = None
+    alarm_confirmation = ''
 
     # give help if the command is the only thing typed
     if message == '!alarm':
@@ -22,13 +21,31 @@ def alarm(author, message):
                              '     !alarm -delete all\n' \
 
     # create new alarm
-    elif '!alarm -set' in message:
-        # !alarm -set will show help page if typed alone
+    elif '!alarm -set' in message[:11]:
+        # !alarm -set will show format if type alone
         if message == '!alarm -set':
-            alarm_confirmation = 'hh:mm {mm-dd-yyyy} "alarm name" mention \n' \
-                                 'only hh:mm is mandatory'
-        # create a new alarm if there are parameters after !alarm -set
+            alarm_confirmation = '[hh:mm] [mm-dd-yyyy] ["Alarm Name"] [Mention] \n' \
+                                 'only [hh:mm] is mandatory; "Alarm Name" must be in double quotes'
+        # attempt to create an alarm and upload it to the database if there are characters after !alarm -set
         else:
-            alarm_confirmation = alarm_set.alarm_set(message, author)
+            alarm_confirmation = alarm_class.Alarm(message=message, author=author).upload_to_db()[0]
+
+    # see alarms that are currently set
+    elif '!alarm -view' in message[:12]:
+        # view every message that you have set
+        if message == '!alarm -view':
+            for i in alarm_class.Alarm().retrieve_from_db():
+                alarm_confirmation += f'{i}\n' if i["Author"] == author else ''
+            # tell the user if there is no alarm in the database if there aren't any
+            if alarm_confirmation == '':
+                alarm_confirmation = 'There are currently no alarms in the database that you\'ve created.'
+
+        # view every message in the database
+        elif message == '!alarm -view all':
+            for i in alarm_class.Alarm().retrieve_from_db():
+                alarm_confirmation += f'{i}\n'
+            # tell the user if there is no alarm in the database if there aren't any
+            if alarm_confirmation == '':
+                alarm_confirmation = 'There are currently no alarms in the database.'
 
     return alarm_confirmation
