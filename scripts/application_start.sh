@@ -1,3 +1,3 @@
 #!/bin/bash
-export AWS_DEFAULT_REGION=us-east-1
-python /home/ec2-user/code/main.py
+chmod u+x /home/ec2-user/code/main.sh
+./home/ec2-user/code/main.sh
