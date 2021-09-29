@@ -4,7 +4,7 @@ import hashlib
 import boto3
 from boto3.dynamodb.conditions import Attr
 
-from alarm import verify_user_input
+import verify_user_input
 
 
 class Alarm:

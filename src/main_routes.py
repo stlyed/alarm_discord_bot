@@ -4,7 +4,7 @@ This is the main file for all user request/commands relating alarms
 it gets the alarm command and sends to the proper file to get process
 Get the processed result and send back to user
 """
-from alarm import alarm_class
+import alarm_class
 
 
 def alarm(author, message):
@@ -12,13 +12,7 @@ def alarm(author, message):
 
     # give help if the command is the only thing typed
     if message == '!alarm':
-        alarm_confirmation = 'Here are all the commands included into \"!alarm\":\n' \
-                             '     !alarm -set\n' \
-                             '     !alarm -view\n' \
-                             '     !alarm -view all\n' \
-                             '     !alarm -edit\n' \
-                             '     !alarm -delete\n' \
-                             '     !alarm -delete all\n' \
+        alarm_confirmation = 'For help, type !help'
 
     # create new alarm
     elif '!alarm -set' in message[:11]:

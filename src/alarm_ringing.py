@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import datetime
 
-from alarm import alarm_class
+import alarm_class
 
 
 def alarm_ringing():

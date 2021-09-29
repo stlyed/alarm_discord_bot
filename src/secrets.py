@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 import boto3
 
-active_alarms_file = 'active_alarms.csv'
-active_alarms_dup_file = 'active_alarms-dup.csv'
-
 
 def get_secret(code_secret):
     secret_name = "Alarm_Discord_Bot"

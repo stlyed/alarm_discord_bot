@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
+import discord
 from discord.ext import commands, tasks
 
-import variables
-import help
+import secrets
 
-import alarm.main as main_alarm
-import alarm.alarm_ringing as alarm_ringing
-from alarm import alarm_class
+import main_routes as main_alarm
+import alarm_ringing as alarm_ringing
+import alarm_class
 
 
 def main():
     # initialize discord bot
     bot = commands.Bot(command_prefix='!')
-    discord_channel_id = int(variables.get_secret('DISCORD_CHANNEL_ID'))
-    discord_token_id = variables.get_secret('DISCORD_TOKEN_ID')
+    discord_channel_id = int(secrets.get_secret('DISCORD_CHANNEL_ID'))
+    discord_token_id = secrets.get_secret('DISCORD_TOKEN_ID')
 
     # check when bot is ready
     @bot.event
@@ -37,7 +37,49 @@ def main():
         if message.author != bot.user:
             # give the user all the commands
             if message.content.startswith('!help'):
-                await message.channel.send(help.help)
+                embed = discord.Embed(
+                    title='Alarm Discord Bot',
+                    description='This bot allows you to set an alarm.',
+                    color=discord.Color.random()
+                )
+                embed.set_thumbnail(
+                    url='https://cdn.discordapp.com/avatars/883036208836538479/7b963c04c99f50fea9369378320febe0.png?size=128')
+                embed.add_field(
+                    name='!alarm -set',
+                    value='create a new alarm.\n'
+                          '!alarm -set [hh:mm] [mm-dd-yyyy] ["Alarm Name"] [Mention] \n'
+                          'only [hh:mm] is mandatory; "Alarm Name" must be in double quotes.',
+                    inline=False
+                )
+                embed.add_field(
+                    name='!alarm -view',
+                    value='See all currently active alarms that you have set.',
+                    inline=True
+                )
+                embed.add_field(
+                    name='!alarm -view all',
+                    value='See all currently active alarms that is in the database.\n',
+                    inline=True
+                )
+                embed.add_field(
+                    name='!alarm -edit ',
+                    value='Edit an alarm in the database {currently does\'nt work}.\n',
+                    inline=False
+                )
+                embed.add_field(
+                    name='!alarm -delete',
+                    value='Delete an alarm from the database, {currently does\'nt work}.\n'
+                          '!alarm -delete [Alarm Id] \n'
+                          'the ID can be found from !alarm -view ',
+                    inline=True
+                )
+                embed.add_field(
+                    name='!alarm -delete all',
+                    value='Delete all alarm for a user from the database, {currently does\'nt work}.\n'
+                          '!alarm -delete [@author]',
+                    inline=True
+                )
+                await message.channel.send(embed=embed)
 
             # everything that has to do with alarm
             if message.content.startswith('!alarm'):
