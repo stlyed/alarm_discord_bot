@@ -3,8 +3,8 @@ from discord.ext import commands, tasks
 
 import secrets
 
-import main_routes as main_alarm
-import alarm_ringing as alarm_ringing
+import alarm_main
+import alarm_ringing
 import help as alarm_help
 import alarm_class
 
@@ -41,7 +41,7 @@ def main():
 
             # everything that has to do with alarm
             if message.content.startswith('!alarm'):
-                await message.channel.send(main_alarm.alarm(message.author.mention, message.content))
+                await message.channel.send(alarm_main.alarm(message.author.mention, message.content))
 
     # send discord bot live
     bot.run(discord_token_id)
