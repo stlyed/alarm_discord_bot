@@ -11,11 +11,9 @@ def get_secret(code_secret):
     client = session.client(service_name='secretsmanager',
                             region_name=region_name)
 
-    # Get every secret stored
     response = str(client.get_secret_value(SecretId=secret_name))
     response = response[response.find('SecretString'):response.find('}') + 1]
 
-    # only return the secret that is asked for
     secret_value = [i for i in range(len(response)) if response.startswith('"', i)]
     x, y = 0, 1
     for secrets in range(int(len(secret_value) / 2)):
